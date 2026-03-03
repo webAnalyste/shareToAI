@@ -32,6 +32,7 @@ cp readme.txt "$RELEASE_DIR/"
 cp README.md "$RELEASE_DIR/"
 cp CHANGELOG.md "$RELEASE_DIR/"
 cp -r assets "$RELEASE_DIR/"
+cp -r includes "$RELEASE_DIR/"
 
 # Créer le ZIP
 echo -e "${YELLOW}🗜️  Création du fichier ZIP...${NC}"

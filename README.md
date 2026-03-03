@@ -19,6 +19,7 @@ Ce plugin permet d'afficher automatiquement une invitation personnalisable "Rés
 - ✅ Responsive et accessible
 - ✅ Sécurisé selon les standards WordPress
 - ✅ Traçabilité des clics (compatible Google Analytics)
+- ✅ **Mises à jour automatiques** depuis GitHub
 
 ## Installation
 

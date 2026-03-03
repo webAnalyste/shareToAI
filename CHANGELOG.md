@@ -22,6 +22,7 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 - ✨ Design responsive et accessible
 - ✨ Tracking des clics compatible Google Analytics
 - ✨ Support de l'internationalisation (i18n)
+- ✨ **Système de mise à jour automatique depuis GitHub**
 - 🔒 Sécurité conforme aux standards WordPress
 - 📚 Documentation complète (README, INSTALLATION, ARCHITECTURE, SECURITY-TESTS)
 - 🔄 Versioning GIT complet

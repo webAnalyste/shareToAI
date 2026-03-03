@@ -20,6 +20,9 @@ define('SHARETOAI_VERSION', '1.0.0');
 define('SHARETOAI_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SHARETOAI_PLUGIN_URL', plugin_dir_url(__FILE__));
 
+// Charger le système de mise à jour automatique
+require_once SHARETOAI_PLUGIN_DIR . 'includes/class-updater.php';
+
 class ShareToAI {
     
     private static $instance = null;
@@ -429,3 +432,13 @@ class ShareToAI {
 }
 
 ShareToAI::get_instance();
+
+// Initialiser le système de mise à jour automatique
+if (is_admin()) {
+    new ShareToAI_Updater(
+        __FILE__,
+        'webAnalyste',
+        'shareToAI',
+        SHARETOAI_VERSION
+    );
+}
