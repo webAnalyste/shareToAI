@@ -2,9 +2,9 @@
 Contributors: franckscan
 Tags: ai, artificial intelligence, chatgpt, claude, perplexity, summary, content
 Requires at least: 5.0
-Tested up to: 6.4
+Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.0.3
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -99,6 +99,12 @@ Non, ShareToAI est très léger (<10KB total) et n'effectue aucune requête exte
 5. Personnalisation du prompt avec placeholder {URL}
 
 == Changelog ==
+
+= 1.1.0 - 2026-03-03 =
+* Version optimisée pour WordPress.org
+* Suppression du système de mise à jour personnalisé (WordPress.org gère nativement les mises à jour)
+* Suppression de load_plugin_textdomain() (automatique depuis WP 4.6)
+* Mise à jour compatibilité WordPress 6.9
 
 = 1.0.3 - 2026-03-03 =
 * Version de test pour le système de mise à jour automatique

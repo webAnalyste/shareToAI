@@ -3,7 +3,7 @@
  * Plugin Name: ShareToAI
  * Plugin URI: https://github.com/webAnalyste/shareToAI
  * Description: Ajoute automatiquement des liens vers différentes IA pour résumer le contenu de vos posts et CPT
- * Version: 1.0.3
+ * Version: 1.1.0
  * Author: Franck Scandolera
  * Author URI: https://www.webanalyste.com
  * License: GPL v2 or later
@@ -16,12 +16,12 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('SHARETOAI_VERSION', '1.0.3');
+define('SHARETOAI_VERSION', '1.1.0');
 define('SHARETOAI_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SHARETOAI_PLUGIN_URL', plugin_dir_url(__FILE__));
 
-// Charger le système de mise à jour automatique
-require_once SHARETOAI_PLUGIN_DIR . 'includes/class-updater.php';
+// Système de mise à jour automatique désactivé pour la version WordPress.org
+// WordPress.org gère nativement les mises à jour
 
 class ShareToAI {
     
@@ -35,7 +35,7 @@ class ShareToAI {
     }
     
     private function __construct() {
-        add_action('plugins_loaded', array($this, 'load_textdomain'));
+        // load_plugin_textdomain() n'est plus nécessaire depuis WP 4.6 pour les plugins hébergés sur WordPress.org
         add_action('wp_enqueue_scripts', array($this, 'enqueue_frontend_assets'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
         add_action('admin_menu', array($this, 'add_admin_menu'));
@@ -49,9 +49,7 @@ class ShareToAI {
         register_deactivation_hook(__FILE__, array($this, 'deactivate'));
     }
     
-    public function load_textdomain() {
-        load_plugin_textdomain('sharetoai', false, dirname(plugin_basename(__FILE__)) . '/languages');
-    }
+    // load_textdomain() supprimé - WordPress.org charge automatiquement les traductions
     
     public function enqueue_frontend_assets() {
         wp_enqueue_style(
@@ -433,12 +431,5 @@ class ShareToAI {
 
 ShareToAI::get_instance();
 
-// Initialiser le système de mise à jour automatique
-if (is_admin()) {
-    new ShareToAI_Updater(
-        __FILE__,
-        'webAnalyste',
-        'shareToAI',
-        SHARETOAI_VERSION
-    );
-}
+// Système de mise à jour automatique désactivé pour WordPress.org
+// WordPress.org gère nativement les mises à jour des plugins hébergés
