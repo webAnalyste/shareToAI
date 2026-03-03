@@ -1,6 +1,8 @@
-# AI Summary Links
+# ShareToAI
 
 Plugin WordPress qui ajoute automatiquement des liens vers différentes IA pour résumer le contenu de vos posts et Custom Post Types.
+
+[![GitHub](https://img.shields.io/badge/GitHub-shareToAI-blue)](https://github.com/webAnalyste/shareToAI)
 
 ## Description
 
@@ -10,7 +12,7 @@ Ce plugin permet d'afficher automatiquement une invitation personnalisable "Rés
 
 - ✅ Affichage automatique en haut, en bas ou les deux
 - ✅ Support des posts et Custom Post Types
-- ✅ Shortcode `[ai_summary_links]` pour placement manuel
+- ✅ Shortcode `[sharetoai]` pour placement manuel
 - ✅ Texte et prompt personnalisables
 - ✅ Choix des services IA à afficher
 - ✅ 3 styles d'affichage : icônes, boutons, liste
@@ -20,10 +22,10 @@ Ce plugin permet d'afficher automatiquement une invitation personnalisable "Rés
 
 ## Installation
 
-1. Télécharger le dossier `ai-summary-links`
+1. Télécharger le dossier `sharetoai`
 2. Le placer dans `/wp-content/plugins/`
 3. Activer le plugin dans l'administration WordPress
-4. Configurer les options dans Réglages > AI Summary Links
+4. Configurer les options dans Réglages > ShareToAI
 
 ## Configuration
 
@@ -42,7 +44,7 @@ Ce plugin permet d'afficher automatiquement une invitation personnalisable "Rés
 Pour afficher les liens manuellement dans vos contenus :
 
 ```
-[ai_summary_links]
+[sharetoai]
 ```
 
 ## Services IA supportés
@@ -72,7 +74,8 @@ Le plugin respecte toutes les bonnes pratiques WordPress :
 
 ## Support
 
-Pour toute question ou problème : https://www.flowt.fr
+- GitHub : https://github.com/webAnalyste/shareToAI
+- Site web : https://www.flowt.fr
 
 ## Changelog
 

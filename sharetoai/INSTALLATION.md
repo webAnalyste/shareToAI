@@ -1,21 +1,21 @@
-# Guide d'Installation - AI Summary Links
+# Guide d'Installation - ShareToAI
 
 ## Installation rapide
 
 ### Étape 1 : Téléchargement
-Copiez le dossier `ai-summary-links` dans votre répertoire de plugins WordPress :
+Copiez le dossier `sharetoai` dans votre répertoire de plugins WordPress :
 ```
-/wp-content/plugins/ai-summary-links/
+/wp-content/plugins/sharetoai/
 ```
 
 ### Étape 2 : Activation
 1. Connectez-vous à votre administration WordPress
 2. Allez dans **Extensions** > **Extensions installées**
-3. Trouvez **AI Summary Links**
+3. Trouvez **ShareToAI**
 4. Cliquez sur **Activer**
 
 ### Étape 3 : Configuration
-1. Allez dans **Réglages** > **AI Summary Links**
+1. Allez dans **Réglages** > **ShareToAI**
 2. Configurez les options selon vos préférences :
    - ✅ Cochez "Activer le plugin"
    - 📍 Choisissez la position (en haut, en bas, les deux)
@@ -45,13 +45,13 @@ Le plugin est livré avec ces paramètres par défaut :
 Pour afficher les liens manuellement dans vos contenus :
 
 ```
-[ai_summary_links]
+[sharetoai]
 ```
 
 Vous pouvez l'insérer :
 - Dans un article ou une page
 - Dans un widget texte
-- Dans un template PHP : `<?php echo do_shortcode('[ai_summary_links]'); ?>`
+- Dans un template PHP : `<?php echo do_shortcode('[sharetoai]'); ?>`
 
 ## Personnalisation du prompt
 

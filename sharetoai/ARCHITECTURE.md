@@ -1,10 +1,10 @@
-# Architecture du Plugin - AI Summary Links
+# Architecture du Plugin - ShareToAI
 
 ## Structure des fichiers
 
 ```
-ai-summary-links/
-├── ai-summary-links.php      # Fichier principal du plugin
+sharetoai/
+├── sharetoai.php              # Fichier principal du plugin
 ├── uninstall.php             # Script de désinstallation
 ├── .gitignore                # Fichiers à ignorer par Git
 ├── README.md                 # Documentation principale
@@ -26,7 +26,7 @@ ai-summary-links/
         └── mistral.svg       # Icône Mistral
 ```
 
-## Classe principale : AI_Summary_Links
+## Classe principale : ShareToAI
 
 ### Pattern Singleton
 Le plugin utilise le pattern Singleton pour garantir une seule instance de la classe.
@@ -49,7 +49,7 @@ public static function get_instance()
 - `the_content` (priorité 999) → Injection des liens IA
 
 #### Shortcodes
-- `[ai_summary_links]` → Affichage manuel
+- `[sharetoai]` → Affichage manuel
 
 ### Méthodes principales
 
@@ -142,7 +142,7 @@ update_option('aisl_options')
 ## Options enregistrées
 
 ```php
-'aisl_options' => [
+'sharetoai_options' => [
     'enabled' => 1,                    // Activation
     'position' => 'bottom',            // Position (top/bottom/both/manual)
     'post_types' => ['post'],          // Types de contenu
@@ -173,12 +173,12 @@ Chaque service est défini avec :
 ## Styles CSS
 
 ### Frontend
-- `.aisl-container` : Conteneur principal
-- `.aisl-text` : Texte d'invitation
-- `.aisl-links` : Conteneur des liens
-- `.aisl-link` : Lien individuel
-- `.aisl-icon` : Icône
-- `.aisl-style-*` : Variantes de style
+- `.sharetoai-container` : Conteneur principal
+- `.sharetoai-text` : Texte d'invitation
+- `.sharetoai-links` : Conteneur des liens
+- `.sharetoai-link` : Lien individuel
+- `.sharetoai-icon` : Icône
+- `.sharetoai-style-*` : Variantes de style
 
 ### Responsive
 - Media query à 768px pour mobile
@@ -188,7 +188,7 @@ Chaque service est défini avec :
 
 ### Frontend
 - Tracking des clics (Google Analytics)
-- Event listener sur `.aisl-link`
+- Event listener sur `.sharetoai-link`
 
 ### Admin
 - Support WP Color Picker (prévu pour futures extensions)
@@ -197,7 +197,7 @@ Chaque service est défini avec :
 
 ### Activation
 ```php
-add_option('aisl_options', $default_options)
+add_option('sharetoai_options', $default_options)
 ```
 
 ### Désactivation
@@ -205,8 +205,8 @@ add_option('aisl_options', $default_options)
 
 ### Désinstallation (uninstall.php)
 ```php
-delete_option('aisl_options')
-delete_site_option('aisl_options') // Multisite
+delete_option('sharetoai_options')
+delete_site_option('sharetoai_options') // Multisite
 ```
 
 ## Extensibilité

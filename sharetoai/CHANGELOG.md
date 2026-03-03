@@ -1,4 +1,4 @@
-# Changelog - AI Summary Links
+# Changelog - ShareToAI
 
 Toutes les modifications notables de ce projet seront documentées dans ce fichier.
 
@@ -10,8 +10,8 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 ### Ajouté
 - ✨ Affichage automatique des liens de résumé IA sur les posts et CPT
 - ✨ Support de 5 services IA : Perplexity, ChatGPT, Claude, Grok, Mistral
-- ✨ Shortcode `[ai_summary_links]` pour placement manuel
-- ✨ Interface d'administration complète dans Réglages > AI Summary Links
+- ✨ Shortcode `[sharetoai]` pour placement manuel
+- ✨ Interface d'administration complète dans Réglages > ShareToAI
 - ✨ Personnalisation du texte d'invitation
 - ✨ Personnalisation du prompt avec placeholder `{URL}`
 - ✨ Choix de la position : haut, bas, les deux, ou manuel
@@ -52,7 +52,7 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 - 📖 CHANGELOG.md : Historique des versions
 
 ### Commits GIT
-- `f6603af` - feat: création plugin AI Summary Links v1.0.0
+- `f6603af` - feat: création plugin ShareToAI v1.0.0
 - `1dd6c63` - docs: ajout documentation tests sécurité et guide installation
 - `fc8b380` - docs: ajout documentation architecture du plugin
 

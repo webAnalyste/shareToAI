@@ -1,14 +1,14 @@
 <?php
 /**
- * Plugin Name: AI Summary Links
- * Plugin URI: https://www.flowt.fr
+ * Plugin Name: ShareToAI
+ * Plugin URI: https://github.com/webAnalyste/shareToAI
  * Description: Ajoute automatiquement des liens vers différentes IA pour résumer le contenu de vos posts et CPT
  * Version: 1.0.0
  * Author: Flowt
  * Author URI: https://www.flowt.fr
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: ai-summary-links
+ * Text Domain: sharetoai
  * Domain Path: /languages
  */
 
@@ -16,11 +16,11 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('AISL_VERSION', '1.0.0');
-define('AISL_PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('AISL_PLUGIN_URL', plugin_dir_url(__FILE__));
+define('SHARETOAI_VERSION', '1.0.0');
+define('SHARETOAI_PLUGIN_DIR', plugin_dir_path(__FILE__));
+define('SHARETOAI_PLUGIN_URL', plugin_dir_url(__FILE__));
 
-class AI_Summary_Links {
+class ShareToAI {
     
     private static $instance = null;
     
@@ -40,50 +40,50 @@ class AI_Summary_Links {
         
         add_filter('the_content', array($this, 'add_ai_links_to_content'), 999);
         
-        add_shortcode('ai_summary_links', array($this, 'shortcode_handler'));
+        add_shortcode('sharetoai', array($this, 'shortcode_handler'));
         
         register_activation_hook(__FILE__, array($this, 'activate'));
         register_deactivation_hook(__FILE__, array($this, 'deactivate'));
     }
     
     public function load_textdomain() {
-        load_plugin_textdomain('ai-summary-links', false, dirname(plugin_basename(__FILE__)) . '/languages');
+        load_plugin_textdomain('sharetoai', false, dirname(plugin_basename(__FILE__)) . '/languages');
     }
     
     public function enqueue_frontend_assets() {
         wp_enqueue_style(
-            'aisl-frontend',
-            AISL_PLUGIN_URL . 'assets/css/frontend.css',
+            'sharetoai-frontend',
+            SHARETOAI_PLUGIN_URL . 'assets/css/frontend.css',
             array(),
-            AISL_VERSION
+            SHARETOAI_VERSION
         );
         
         wp_enqueue_script(
-            'aisl-frontend',
-            AISL_PLUGIN_URL . 'assets/js/frontend.js',
+            'sharetoai-frontend',
+            SHARETOAI_PLUGIN_URL . 'assets/js/frontend.js',
             array('jquery'),
-            AISL_VERSION,
+            SHARETOAI_VERSION,
             true
         );
     }
     
     public function enqueue_admin_assets($hook) {
-        if ('settings_page_ai-summary-links' !== $hook) {
+        if ('settings_page_sharetoai' !== $hook) {
             return;
         }
         
         wp_enqueue_style(
-            'aisl-admin',
-            AISL_PLUGIN_URL . 'assets/css/admin.css',
+            'sharetoai-admin',
+            SHARETOAI_PLUGIN_URL . 'assets/css/admin.css',
             array(),
-            AISL_VERSION
+            SHARETOAI_VERSION
         );
         
         wp_enqueue_script(
-            'aisl-admin',
-            AISL_PLUGIN_URL . 'assets/js/admin.js',
+            'sharetoai-admin',
+            SHARETOAI_PLUGIN_URL . 'assets/js/admin.js',
             array('jquery'),
-            AISL_VERSION,
+            SHARETOAI_VERSION,
             true
         );
         
@@ -93,78 +93,78 @@ class AI_Summary_Links {
     
     public function add_admin_menu() {
         add_options_page(
-            __('AI Summary Links', 'ai-summary-links'),
-            __('AI Summary Links', 'ai-summary-links'),
+            __('ShareToAI', 'sharetoai'),
+            __('ShareToAI', 'sharetoai'),
             'manage_options',
-            'ai-summary-links',
+            'sharetoai',
             array($this, 'render_admin_page')
         );
     }
     
     public function register_settings() {
-        register_setting('aisl_settings', 'aisl_options', array($this, 'sanitize_options'));
+        register_setting('sharetoai_settings', 'sharetoai_options', array($this, 'sanitize_options'));
         
         add_settings_section(
-            'aisl_general_section',
-            __('Paramètres généraux', 'ai-summary-links'),
+            'sharetoai_general_section',
+            __('Paramètres généraux', 'sharetoai'),
             array($this, 'general_section_callback'),
-            'ai-summary-links'
+            'sharetoai'
         );
         
         add_settings_field(
-            'aisl_enabled',
-            __('Activer le plugin', 'ai-summary-links'),
+            'sharetoai_enabled',
+            __('Activer le plugin', 'sharetoai'),
             array($this, 'enabled_field_callback'),
-            'ai-summary-links',
-            'aisl_general_section'
+            'sharetoai',
+            'sharetoai_general_section'
         );
         
         add_settings_field(
-            'aisl_position',
-            __('Position', 'ai-summary-links'),
+            'sharetoai_position',
+            __('Position', 'sharetoai'),
             array($this, 'position_field_callback'),
-            'ai-summary-links',
-            'aisl_general_section'
+            'sharetoai',
+            'sharetoai_general_section'
         );
         
         add_settings_field(
-            'aisl_post_types',
-            __('Types de contenu', 'ai-summary-links'),
+            'sharetoai_post_types',
+            __('Types de contenu', 'sharetoai'),
             array($this, 'post_types_field_callback'),
-            'ai-summary-links',
-            'aisl_general_section'
+            'sharetoai',
+            'sharetoai_general_section'
         );
         
         add_settings_field(
-            'aisl_custom_text',
-            __('Texte personnalisé', 'ai-summary-links'),
+            'sharetoai_custom_text',
+            __('Texte personnalisé', 'sharetoai'),
             array($this, 'custom_text_field_callback'),
-            'ai-summary-links',
-            'aisl_general_section'
+            'sharetoai',
+            'sharetoai_general_section'
         );
         
         add_settings_field(
-            'aisl_custom_prompt',
-            __('Prompt personnalisé', 'ai-summary-links'),
+            'sharetoai_custom_prompt',
+            __('Prompt personnalisé', 'sharetoai'),
             array($this, 'custom_prompt_field_callback'),
-            'ai-summary-links',
-            'aisl_general_section'
+            'sharetoai',
+            'sharetoai_general_section'
         );
         
         add_settings_field(
-            'aisl_ai_services',
-            __('Services IA activés', 'ai-summary-links'),
+            'sharetoai_ai_services',
+            __('Services IA activés', 'sharetoai'),
             array($this, 'ai_services_field_callback'),
-            'ai-summary-links',
-            'aisl_general_section'
+            'sharetoai',
+            'sharetoai_general_section'
         );
         
         add_settings_field(
-            'aisl_display_style',
-            __('Style d\'affichage', 'ai-summary-links'),
+            'sharetoai_display_style',
+            __('Style d\'affichage', 'sharetoai'),
             array($this, 'display_style_field_callback'),
-            'ai-summary-links',
-            'aisl_general_section'
+            'sharetoai',
+            'sharetoai_general_section'
         );
     }
     
@@ -183,40 +183,40 @@ class AI_Summary_Links {
     }
     
     public function general_section_callback() {
-        echo '<p>' . esc_html__('Configurez l\'affichage des liens de résumé IA sur votre site.', 'ai-summary-links') . '</p>';
+        echo '<p>' . esc_html__('Configurez l\'affichage des liens de résumé IA sur votre site.', 'sharetoai') . '</p>';
     }
     
     public function enabled_field_callback() {
-        $options = get_option('aisl_options', $this->get_default_options());
+        $options = get_option('sharetoai_options', $this->get_default_options());
         ?>
         <label>
-            <input type="checkbox" name="aisl_options[enabled]" value="1" <?php checked($options['enabled'], 1); ?>>
-            <?php esc_html_e('Activer l\'affichage automatique des liens IA', 'ai-summary-links'); ?>
+            <input type="checkbox" name="sharetoai_options[enabled]" value="1" <?php checked($options['enabled'], 1); ?>>
+            <?php esc_html_e('Activer l\'affichage automatique des liens IA', 'sharetoai'); ?>
         </label>
         <?php
     }
     
     public function position_field_callback() {
-        $options = get_option('aisl_options', $this->get_default_options());
+        $options = get_option('sharetoai_options', $this->get_default_options());
         ?>
-        <select name="aisl_options[position]">
-            <option value="top" <?php selected($options['position'], 'top'); ?>><?php esc_html_e('En haut du contenu', 'ai-summary-links'); ?></option>
-            <option value="bottom" <?php selected($options['position'], 'bottom'); ?>><?php esc_html_e('En bas du contenu', 'ai-summary-links'); ?></option>
-            <option value="both" <?php selected($options['position'], 'both'); ?>><?php esc_html_e('En haut et en bas', 'ai-summary-links'); ?></option>
-            <option value="manual" <?php selected($options['position'], 'manual'); ?>><?php esc_html_e('Manuel (shortcode uniquement)', 'ai-summary-links'); ?></option>
+        <select name="sharetoai_options[position]">
+            <option value="top" <?php selected($options['position'], 'top'); ?>><?php esc_html_e('En haut du contenu', 'sharetoai'); ?></option>
+            <option value="bottom" <?php selected($options['position'], 'bottom'); ?>><?php esc_html_e('En bas du contenu', 'sharetoai'); ?></option>
+            <option value="both" <?php selected($options['position'], 'both'); ?>><?php esc_html_e('En haut et en bas', 'sharetoai'); ?></option>
+            <option value="manual" <?php selected($options['position'], 'manual'); ?>><?php esc_html_e('Manuel (shortcode uniquement)', 'sharetoai'); ?></option>
         </select>
         <?php
     }
     
     public function post_types_field_callback() {
-        $options = get_option('aisl_options', $this->get_default_options());
+        $options = get_option('sharetoai_options', $this->get_default_options());
         $post_types = get_post_types(array('public' => true), 'objects');
         
         foreach ($post_types as $post_type) {
             $checked = in_array($post_type->name, $options['post_types']);
             ?>
             <label style="display: block; margin-bottom: 5px;">
-                <input type="checkbox" name="aisl_options[post_types][]" value="<?php echo esc_attr($post_type->name); ?>" <?php checked($checked); ?>>
+                <input type="checkbox" name="sharetoai_options[post_types][]" value="<?php echo esc_attr($post_type->name); ?>" <?php checked($checked); ?>>
                 <?php echo esc_html($post_type->label); ?>
             </label>
             <?php
@@ -224,30 +224,30 @@ class AI_Summary_Links {
     }
     
     public function custom_text_field_callback() {
-        $options = get_option('aisl_options', $this->get_default_options());
+        $options = get_option('sharetoai_options', $this->get_default_options());
         ?>
-        <input type="text" name="aisl_options[custom_text]" value="<?php echo esc_attr($options['custom_text']); ?>" class="regular-text">
-        <p class="description"><?php esc_html_e('Texte affiché avant les icônes IA', 'ai-summary-links'); ?></p>
+        <input type="text" name="sharetoai_options[custom_text]" value="<?php echo esc_attr($options['custom_text']); ?>" class="regular-text">
+        <p class="description"><?php esc_html_e('Texte affiché avant les icônes IA', 'sharetoai'); ?></p>
         <?php
     }
     
     public function custom_prompt_field_callback() {
-        $options = get_option('aisl_options', $this->get_default_options());
+        $options = get_option('sharetoai_options', $this->get_default_options());
         ?>
-        <textarea name="aisl_options[custom_prompt]" rows="4" class="large-text"><?php echo esc_textarea($options['custom_prompt']); ?></textarea>
-        <p class="description"><?php esc_html_e('Utilisez {URL} comme placeholder pour l\'URL de la page', 'ai-summary-links'); ?></p>
+        <textarea name="sharetoai_options[custom_prompt]" rows="4" class="large-text"><?php echo esc_textarea($options['custom_prompt']); ?></textarea>
+        <p class="description"><?php esc_html_e('Utilisez {URL} comme placeholder pour l\'URL de la page', 'sharetoai'); ?></p>
         <?php
     }
     
     public function ai_services_field_callback() {
-        $options = get_option('aisl_options', $this->get_default_options());
+        $options = get_option('sharetoai_options', $this->get_default_options());
         $services = $this->get_ai_services();
         
         foreach ($services as $key => $service) {
             $checked = in_array($key, $options['ai_services']);
             ?>
             <label style="display: block; margin-bottom: 5px;">
-                <input type="checkbox" name="aisl_options[ai_services][]" value="<?php echo esc_attr($key); ?>" <?php checked($checked); ?>>
+                <input type="checkbox" name="sharetoai_options[ai_services][]" value="<?php echo esc_attr($key); ?>" <?php checked($checked); ?>>
                 <?php echo esc_html($service['name']); ?>
             </label>
             <?php
@@ -255,12 +255,12 @@ class AI_Summary_Links {
     }
     
     public function display_style_field_callback() {
-        $options = get_option('aisl_options', $this->get_default_options());
+        $options = get_option('sharetoai_options', $this->get_default_options());
         ?>
-        <select name="aisl_options[display_style]">
-            <option value="icons" <?php selected($options['display_style'], 'icons'); ?>><?php esc_html_e('Icônes uniquement', 'ai-summary-links'); ?></option>
-            <option value="buttons" <?php selected($options['display_style'], 'buttons'); ?>><?php esc_html_e('Boutons avec texte', 'ai-summary-links'); ?></option>
-            <option value="list" <?php selected($options['display_style'], 'list'); ?>><?php esc_html_e('Liste', 'ai-summary-links'); ?></option>
+        <select name="sharetoai_options[display_style]">
+            <option value="icons" <?php selected($options['display_style'], 'icons'); ?>><?php esc_html_e('Icônes uniquement', 'sharetoai'); ?></option>
+            <option value="buttons" <?php selected($options['display_style'], 'buttons'); ?>><?php esc_html_e('Boutons avec texte', 'sharetoai'); ?></option>
+            <option value="list" <?php selected($options['display_style'], 'list'); ?>><?php esc_html_e('Liste', 'sharetoai'); ?></option>
         </select>
         <?php
     }
@@ -274,23 +274,23 @@ class AI_Summary_Links {
             <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
             <form action="options.php" method="post">
                 <?php
-                settings_fields('aisl_settings');
-                do_settings_sections('ai-summary-links');
-                submit_button(__('Enregistrer les paramètres', 'ai-summary-links'));
+                settings_fields('sharetoai_settings');
+                do_settings_sections('sharetoai');
+                submit_button(__('Enregistrer les paramètres', 'sharetoai'));
                 ?>
             </form>
             
-            <div class="aisl-shortcode-info">
-                <h2><?php esc_html_e('Utilisation du shortcode', 'ai-summary-links'); ?></h2>
-                <p><?php esc_html_e('Vous pouvez utiliser le shortcode suivant pour afficher les liens IA manuellement :', 'ai-summary-links'); ?></p>
-                <code>[ai_summary_links]</code>
+            <div class="sharetoai-shortcode-info">
+                <h2><?php esc_html_e('Utilisation du shortcode', 'sharetoai'); ?></h2>
+                <p><?php esc_html_e('Vous pouvez utiliser le shortcode suivant pour afficher les liens IA manuellement :', 'sharetoai'); ?></p>
+                <code>[sharetoai]</code>
             </div>
         </div>
         <?php
     }
     
     public function add_ai_links_to_content($content) {
-        $options = get_option('aisl_options', $this->get_default_options());
+        $options = get_option('sharetoai_options', $this->get_default_options());
         
         if (!$options['enabled']) {
             return $content;
@@ -323,7 +323,7 @@ class AI_Summary_Links {
     }
     
     private function generate_ai_links() {
-        $options = get_option('aisl_options', $this->get_default_options());
+        $options = get_option('sharetoai_options', $this->get_default_options());
         $current_url = get_permalink();
         
         if (!$current_url) {
@@ -344,31 +344,31 @@ class AI_Summary_Links {
         
         ob_start();
         ?>
-        <div class="aisl-container aisl-style-<?php echo esc_attr($options['display_style']); ?>">
-            <div class="aisl-text">
+        <div class="sharetoai-container sharetoai-style-<?php echo esc_attr($options['display_style']); ?>">
+            <div class="sharetoai-text">
                 <?php echo esc_html($options['custom_text']); ?>
             </div>
-            <div class="aisl-links">
+            <div class="sharetoai-links">
                 <?php foreach ($active_services as $key => $service): ?>
                     <?php
                     $url = str_replace('{PROMPT}', $encoded_prompt, $service['url']);
                     ?>
                     <a href="<?php echo esc_url($url); ?>" 
-                       class="aisl-link aisl-link-<?php echo esc_attr($key); ?>" 
+                       class="sharetoai-link sharetoai-link-<?php echo esc_attr($key); ?>" 
                        target="_blank" 
                        rel="noopener noreferrer"
-                       title="<?php echo esc_attr(sprintf(__('Résumer avec %s', 'ai-summary-links'), $service['name'])); ?>">
+                       title="<?php echo esc_attr(sprintf(__('Résumer avec %s', 'sharetoai'), $service['name'])); ?>">
                         <?php if ($options['display_style'] === 'icons'): ?>
-                            <img src="<?php echo esc_url(AISL_PLUGIN_URL . 'assets/images/' . $service['icon']); ?>" 
+                            <img src="<?php echo esc_url(SHARETOAI_PLUGIN_URL . 'assets/images/' . $service['icon']); ?>" 
                                  alt="<?php echo esc_attr($service['name']); ?>"
-                                 class="aisl-icon">
+                                 class="sharetoai-icon">
                         <?php elseif ($options['display_style'] === 'buttons'): ?>
-                            <img src="<?php echo esc_url(AISL_PLUGIN_URL . 'assets/images/' . $service['icon']); ?>" 
+                            <img src="<?php echo esc_url(SHARETOAI_PLUGIN_URL . 'assets/images/' . $service['icon']); ?>" 
                                  alt="<?php echo esc_attr($service['name']); ?>"
-                                 class="aisl-icon">
-                            <span class="aisl-name"><?php echo esc_html($service['name']); ?></span>
+                                 class="sharetoai-icon">
+                            <span class="sharetoai-name"><?php echo esc_html($service['name']); ?></span>
                         <?php else: ?>
-                            <span class="aisl-name"><?php echo esc_html($service['name']); ?></span>
+                            <span class="sharetoai-name"><?php echo esc_html($service['name']); ?></span>
                         <?php endif; ?>
                     </a>
                 <?php endforeach; ?>
@@ -421,11 +421,11 @@ class AI_Summary_Links {
     }
     
     public function activate() {
-        add_option('aisl_options', $this->get_default_options());
+        add_option('sharetoai_options', $this->get_default_options());
     }
     
     public function deactivate() {
     }
 }
 
-AI_Summary_Links::get_instance();
+ShareToAI::get_instance();

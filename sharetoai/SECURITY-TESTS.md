@@ -1,4 +1,4 @@
-# Tests de Sécurité et Validation - AI Summary Links v1.0.0
+# Tests de Sécurité et Validation - ShareToAI v1.0.0
 
 ## Date du test : 2026-03-03
 
@@ -186,7 +186,7 @@
 
 ## ✅ VALIDATION FINALE
 
-**Le plugin AI Summary Links v1.0.0 est VALIDÉ et PRÊT pour la production.**
+**Le plugin ShareToAI v1.0.0 est VALIDÉ et PRÊT pour la production.**
 
 ### Points forts
 - ✅ Sécurité conforme aux standards WordPress
@@ -206,7 +206,7 @@
 ### Prochaines étapes suggérées
 1. Installer le plugin sur votre site WordPress
 2. Activer le plugin
-3. Configurer les options dans Réglages > AI Summary Links
+3. Configurer les options dans Réglages > ShareToAI
 4. Tester sur un article de blog
 5. Ajuster le style si nécessaire
 

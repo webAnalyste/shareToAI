@@ -1,7 +1,7 @@
-jQuery(document).ready(function($) {
-    $('.aisl-link').on('click', function(e) {
-        var aiName = $(this).find('.aisl-name').text() || $(this).attr('title');
-        
+jQuery(document).ready(function ($) {
+    $('.sharetoai-link').on('click', function (e) {
+        var aiName = $(this).find('.sharetoai-name').text() || $(this).attr('title');
+
         if (typeof gtag !== 'undefined') {
             gtag('event', 'ai_summary_click', {
                 'ai_service': aiName,
