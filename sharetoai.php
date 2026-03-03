@@ -3,7 +3,7 @@
  * Plugin Name: ShareToAI
  * Plugin URI: https://github.com/webAnalyste/shareToAI
  * Description: Ajoute automatiquement des liens vers différentes IA pour résumer le contenu de vos posts et CPT
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Flowt
  * Author URI: https://www.flowt.fr
  * License: GPL v2 or later
@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('SHARETOAI_VERSION', '1.0.0');
+define('SHARETOAI_VERSION', '1.0.1');
 define('SHARETOAI_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SHARETOAI_PLUGIN_URL', plugin_dir_url(__FILE__));
 
@@ -359,7 +359,7 @@ class ShareToAI {
                     <a href="<?php echo esc_url($url); ?>" 
                        class="sharetoai-link sharetoai-link-<?php echo esc_attr($key); ?>" 
                        target="_blank" 
-                       rel="noopener noreferrer"
+                       rel="nofollow noopener noreferrer"
                        title="<?php echo esc_attr(sprintf(__('Résumer avec %s', 'sharetoai'), $service['name'])); ?>">
                         <?php if ($options['display_style'] === 'icons'): ?>
                             <img src="<?php echo esc_url(SHARETOAI_PLUGIN_URL . 'assets/images/' . $service['icon']); ?>" 

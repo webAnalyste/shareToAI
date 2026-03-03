@@ -5,6 +5,18 @@ Toutes les modifications notables de ce projet seront documentées dans ce fichi
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 
+## [1.0.1] - 2026-03-03
+
+### Corrigé
+- 🔒 **SEO** : Ajout de `rel="nofollow"` sur tous les liens vers les services IA
+- 🎨 **CSS** : Suppression du soulignement des liens en mode "Boutons" et "Liste"
+- 🎨 **Design** : Ajout de bordures sur les boutons pour un meilleur rendu visuel
+- 🎨 **Compatibilité** : Utilisation de `!important` pour éviter les conflits avec les thèmes
+
+### Technique
+- Amélioration de la spécificité CSS pour éviter les écrasements par les thèmes
+- Ajout de styles pour tous les états des liens (hover, focus, active, visited)
+
 ## [1.0.0] - 2026-03-03
 
 ### Ajouté

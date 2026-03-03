@@ -24,12 +24,19 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    text-decoration: none;
+    text-decoration: none !important;
     transition: all 0.3s ease;
 }
 
 .sharetoai-link:hover {
     transform: translateY(-2px);
+    text-decoration: none !important;
+}
+
+.sharetoai-link:focus,
+.sharetoai-link:active,
+.sharetoai-link:visited {
+    text-decoration: none !important;
 }
 
 .sharetoai-icon {
@@ -54,19 +61,25 @@
     background: white;
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    color: #333;
+    color: #333 !important;
     font-weight: 500;
+    border: 1px solid #ddd;
 }
 
 .sharetoai-style-buttons .sharetoai-link:hover {
     background: #0073aa;
-    color: white;
+    color: white !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-color: #0073aa;
 }
 
 .sharetoai-style-buttons .sharetoai-icon {
     width: 24px;
     height: 24px;
+}
+
+.sharetoai-style-buttons .sharetoai-name {
+    text-decoration: none !important;
 }
 
 .sharetoai-style-list .sharetoai-links {
@@ -81,18 +94,24 @@
     width: 100%;
     max-width: 300px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    color: #333;
+    color: #333 !important;
     font-weight: 500;
+    border: 1px solid #ddd;
 }
 
 .sharetoai-style-list .sharetoai-link:hover {
     background: #0073aa;
-    color: white;
+    color: white !important;
+    border-color: #0073aa;
 }
 
 .sharetoai-style-list .sharetoai-icon {
     width: 24px;
     height: 24px;
+}
+
+.sharetoai-style-list .sharetoai-name {
+    text-decoration: none !important;
 }
 
 @media (max-width: 768px) {
