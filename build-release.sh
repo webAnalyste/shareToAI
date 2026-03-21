@@ -12,12 +12,12 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 
 VERSION=${1:-1.0.0}
-PLUGIN_NAME="sharetoai"
+PLUGIN_NAME="briefr-share-summarize"
 BUILD_DIR="build"
 RELEASE_DIR="$BUILD_DIR/$PLUGIN_NAME"
-ZIP_NAME="sharetoai-${VERSION}.zip"
+ZIP_NAME="briefr-share-summarize-${VERSION}.zip"
 
-echo -e "${BLUE}🚀 Création de la release ShareToAI v${VERSION}${NC}"
+echo -e "${BLUE}🚀 Création de la release Briefr: Share & Summarize v${VERSION}${NC}"
 
 # Nettoyer le dossier de build
 echo -e "${YELLOW}📦 Nettoyage du dossier de build...${NC}"
@@ -26,7 +26,7 @@ mkdir -p "$RELEASE_DIR"
 
 # Copier les fichiers nécessaires
 echo -e "${YELLOW}📋 Copie des fichiers...${NC}"
-cp sharetoai.php "$RELEASE_DIR/"
+cp briefr-share-summarize.php "$RELEASE_DIR/"
 cp uninstall.php "$RELEASE_DIR/"
 cp readme.txt "$RELEASE_DIR/"
 cp README.md "$RELEASE_DIR/"
@@ -52,8 +52,8 @@ echo -e "${GREEN}📊 Taille : $(du -h "$ZIP_NAME" | cut -f1)${NC}"
 echo ""
 echo -e "${BLUE}Prochaines étapes :${NC}"
 echo "1. Tester l'installation du ZIP sur un site WordPress"
-echo "2. Créer une release sur GitHub"
+echo "2. Uploader sur WordPress.org"
 echo "3. Uploader le fichier $ZIP_NAME"
 echo ""
-echo -e "${YELLOW}Commande GitHub Release :${NC}"
-echo "gh release create v${VERSION} ${ZIP_NAME} --title \"ShareToAI v${VERSION}\" --notes \"Voir CHANGELOG.md\""
+echo -e "${YELLOW}Upload WordPress.org :${NC}"
+echo "https://wordpress.org/plugins/developers/add/"

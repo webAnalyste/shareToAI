@@ -15,11 +15,11 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('SHARETOAI_VERSION', '1.0.4');
-define('SHARETOAI_PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('SHARETOAI_PLUGIN_URL', plugin_dir_url(__FILE__));
+define('BRIEFR_VERSION', '1.0.4');
+define('BRIEFR_PLUGIN_DIR', plugin_dir_path(__FILE__));
+define('BRIEFR_PLUGIN_URL', plugin_dir_url(__FILE__));
 
-class ShareToAI {
+class Briefr_Share_Summarize {
     
     private static $instance = null;
     
@@ -39,50 +39,50 @@ class ShareToAI {
         
         add_filter('the_content', array($this, 'add_ai_links_to_content'), 999);
         
-        add_shortcode('sharetoai', array($this, 'shortcode_handler'));
+        add_shortcode('briefr-share-summarize', array($this, 'shortcode_handler'));
         
         register_activation_hook(__FILE__, array($this, 'activate'));
         register_deactivation_hook(__FILE__, array($this, 'deactivate'));
     }
     
     public function load_textdomain() {
-        load_plugin_textdomain('sharetoai', false, dirname(plugin_basename(__FILE__)) . '/languages');
+        load_plugin_textdomain('briefr-share-summarize', false, dirname(plugin_basename(__FILE__)) . '/languages');
     }
     
     public function enqueue_frontend_assets() {
         wp_enqueue_style(
-            'sharetoai-frontend',
-            SHARETOAI_PLUGIN_URL . 'assets/css/frontend.css',
+            'briefr-frontend',
+            BRIEFR_PLUGIN_URL . 'assets/css/frontend.css',
             array(),
-            SHARETOAI_VERSION
+            BRIEFR_VERSION
         );
         
         wp_enqueue_script(
-            'sharetoai-frontend',
-            SHARETOAI_PLUGIN_URL . 'assets/js/frontend.js',
+            'briefr-frontend',
+            BRIEFR_PLUGIN_URL . 'assets/js/frontend.js',
             array('jquery'),
-            SHARETOAI_VERSION,
+            BRIEFR_VERSION,
             true
         );
     }
     
     public function enqueue_admin_assets($hook) {
-        if ('settings_page_sharetoai' !== $hook) {
+        if ('settings_page_briefr-share-summarize' !== $hook) {
             return;
         }
         
         wp_enqueue_style(
-            'sharetoai-admin',
-            SHARETOAI_PLUGIN_URL . 'assets/css/admin.css',
+            'briefr-admin',
+            BRIEFR_PLUGIN_URL . 'assets/css/admin.css',
             array(),
-            SHARETOAI_VERSION
+            BRIEFR_VERSION
         );
         
         wp_enqueue_script(
-            'sharetoai-admin',
-            SHARETOAI_PLUGIN_URL . 'assets/js/admin.js',
+            'briefr-admin',
+            BRIEFR_PLUGIN_URL . 'assets/js/admin.js',
             array('jquery'),
-            SHARETOAI_VERSION,
+            BRIEFR_VERSION,
             true
         );
         
@@ -92,78 +92,78 @@ class ShareToAI {
     
     public function add_admin_menu() {
         add_options_page(
-            __('Briefr: Share & Summarize', 'sharetoai'),
-            __('Briefr', 'sharetoai'),
+            __('Briefr: Share & Summarize', 'briefr-share-summarize'),
+            __('Briefr', 'briefr-share-summarize'),
             'manage_options',
-            'sharetoai',
+            'briefr-share-summarize',
             array($this, 'render_admin_page')
         );
     }
     
     public function register_settings() {
-        register_setting('sharetoai_settings', 'sharetoai_options', array($this, 'sanitize_options'));
+        register_setting('briefr_settings', 'briefr_options', array($this, 'sanitize_options'));
         
         add_settings_section(
-            'sharetoai_general_section',
-            __('Paramètres généraux', 'sharetoai'),
+            'briefr_general_section',
+            __('Paramètres généraux', 'briefr-share-summarize'),
             array($this, 'general_section_callback'),
-            'sharetoai'
+            'briefr'
         );
         
         add_settings_field(
-            'sharetoai_enabled',
-            __('Activer le plugin', 'sharetoai'),
+            'briefr_enabled',
+            __('Activer le plugin', 'briefr-share-summarize'),
             array($this, 'enabled_field_callback'),
-            'sharetoai',
-            'sharetoai_general_section'
+            'briefr',
+            'briefr_general_section'
         );
         
         add_settings_field(
-            'sharetoai_position',
-            __('Position', 'sharetoai'),
+            'briefr_position',
+            __('Position', 'briefr-share-summarize'),
             array($this, 'position_field_callback'),
-            'sharetoai',
-            'sharetoai_general_section'
+            'briefr',
+            'briefr_general_section'
         );
         
         add_settings_field(
-            'sharetoai_post_types',
-            __('Types de contenu', 'sharetoai'),
+            'briefr_post_types',
+            __('Types de contenu', 'briefr-share-summarize'),
             array($this, 'post_types_field_callback'),
-            'sharetoai',
-            'sharetoai_general_section'
+            'briefr',
+            'briefr_general_section'
         );
         
         add_settings_field(
-            'sharetoai_custom_text',
-            __('Texte personnalisé', 'sharetoai'),
+            'briefr_custom_text',
+            __('Texte personnalisé', 'briefr-share-summarize'),
             array($this, 'custom_text_field_callback'),
-            'sharetoai',
-            'sharetoai_general_section'
+            'briefr',
+            'briefr_general_section'
         );
         
         add_settings_field(
-            'sharetoai_custom_prompt',
-            __('Prompt personnalisé', 'sharetoai'),
+            'briefr_custom_prompt',
+            __('Prompt personnalisé', 'briefr-share-summarize'),
             array($this, 'custom_prompt_field_callback'),
-            'sharetoai',
-            'sharetoai_general_section'
+            'briefr',
+            'briefr_general_section'
         );
         
         add_settings_field(
-            'sharetoai_ai_services',
-            __('Services IA activés', 'sharetoai'),
+            'briefr_ai_services',
+            __('Services IA activés', 'briefr-share-summarize'),
             array($this, 'ai_services_field_callback'),
-            'sharetoai',
-            'sharetoai_general_section'
+            'briefr',
+            'briefr_general_section'
         );
         
         add_settings_field(
-            'sharetoai_display_style',
-            __('Style d\'affichage', 'sharetoai'),
+            'briefr_display_style',
+            __('Style d\'affichage', 'briefr-share-summarize'),
             array($this, 'display_style_field_callback'),
-            'sharetoai',
-            'sharetoai_general_section'
+            'briefr',
+            'briefr_general_section'
         );
     }
     
@@ -216,40 +216,40 @@ class ShareToAI {
     }
     
     public function general_section_callback() {
-        echo '<p>' . esc_html__('Configurez l\'affichage des liens de résumé IA sur votre site.', 'sharetoai') . '</p>';
+        echo '<p>' . esc_html__('Configurez l\'affichage des liens de résumé IA sur votre site.', 'briefr-share-summarize') . '</p>';
     }
     
     public function enabled_field_callback() {
-        $options = get_option('sharetoai_options', $this->get_default_options());
+        $options = get_option('briefr_options', $this->get_default_options());
         ?>
         <label>
-            <input type="checkbox" name="sharetoai_options[enabled]" value="1" <?php checked($options['enabled'], 1); ?>>
-            <?php esc_html_e('Activer l\'affichage automatique des liens IA', 'sharetoai'); ?>
+            <input type="checkbox" name="briefr_options[enabled]" value="1" <?php checked($options['enabled'], 1); ?>>
+            <?php esc_html_e('Activer l\'affichage automatique des liens IA', 'briefr-share-summarize'); ?>
         </label>
         <?php
     }
     
     public function position_field_callback() {
-        $options = get_option('sharetoai_options', $this->get_default_options());
+        $options = get_option('briefr_options', $this->get_default_options());
         ?>
-        <select name="sharetoai_options[position]">
-            <option value="top" <?php selected($options['position'], 'top'); ?>><?php esc_html_e('En haut du contenu', 'sharetoai'); ?></option>
-            <option value="bottom" <?php selected($options['position'], 'bottom'); ?>><?php esc_html_e('En bas du contenu', 'sharetoai'); ?></option>
-            <option value="both" <?php selected($options['position'], 'both'); ?>><?php esc_html_e('En haut et en bas', 'sharetoai'); ?></option>
-            <option value="manual" <?php selected($options['position'], 'manual'); ?>><?php esc_html_e('Manuel (shortcode uniquement)', 'sharetoai'); ?></option>
+        <select name="briefr_options[position]">
+            <option value="top" <?php selected($options['position'], 'top'); ?>><?php esc_html_e('En haut du contenu', 'briefr-share-summarize'); ?></option>
+            <option value="bottom" <?php selected($options['position'], 'bottom'); ?>><?php esc_html_e('En bas du contenu', 'briefr-share-summarize'); ?></option>
+            <option value="both" <?php selected($options['position'], 'both'); ?>><?php esc_html_e('En haut et en bas', 'briefr-share-summarize'); ?></option>
+            <option value="manual" <?php selected($options['position'], 'manual'); ?>><?php esc_html_e('Manuel (shortcode uniquement)', 'briefr-share-summarize'); ?></option>
         </select>
         <?php
     }
     
     public function post_types_field_callback() {
-        $options = get_option('sharetoai_options', $this->get_default_options());
+        $options = get_option('briefr_options', $this->get_default_options());
         $post_types = get_post_types(array('public' => true), 'objects');
         
         foreach ($post_types as $post_type) {
             $checked = in_array($post_type->name, $options['post_types']);
             ?>
             <label style="display: block; margin-bottom: 5px;">
-                <input type="checkbox" name="sharetoai_options[post_types][]" value="<?php echo esc_attr($post_type->name); ?>" <?php checked($checked); ?>>
+                <input type="checkbox" name="briefr_options[post_types][]" value="<?php echo esc_attr($post_type->name); ?>" <?php checked($checked); ?>>
                 <?php echo esc_html($post_type->label); ?>
             </label>
             <?php
@@ -257,30 +257,30 @@ class ShareToAI {
     }
     
     public function custom_text_field_callback() {
-        $options = get_option('sharetoai_options', $this->get_default_options());
+        $options = get_option('briefr_options', $this->get_default_options());
         ?>
-        <input type="text" name="sharetoai_options[custom_text]" value="<?php echo esc_attr($options['custom_text']); ?>" class="regular-text">
-        <p class="description"><?php esc_html_e('Texte affiché avant les icônes IA', 'sharetoai'); ?></p>
+        <input type="text" name="briefr_options[custom_text]" value="<?php echo esc_attr($options['custom_text']); ?>" class="regular-text">
+        <p class="description"><?php esc_html_e('Texte affiché avant les icônes IA', 'briefr-share-summarize'); ?></p>
         <?php
     }
     
     public function custom_prompt_field_callback() {
-        $options = get_option('sharetoai_options', $this->get_default_options());
+        $options = get_option('briefr_options', $this->get_default_options());
         ?>
-        <textarea name="sharetoai_options[custom_prompt]" rows="4" class="large-text"><?php echo esc_textarea($options['custom_prompt']); ?></textarea>
-        <p class="description"><?php esc_html_e('Utilisez {URL} comme placeholder pour l\'URL de la page', 'sharetoai'); ?></p>
+        <textarea name="briefr_options[custom_prompt]" rows="4" class="large-text"><?php echo esc_textarea($options['custom_prompt']); ?></textarea>
+        <p class="description"><?php esc_html_e('Utilisez {URL} comme placeholder pour l\'URL de la page', 'briefr-share-summarize'); ?></p>
         <?php
     }
     
     public function ai_services_field_callback() {
-        $options = get_option('sharetoai_options', $this->get_default_options());
+        $options = get_option('briefr_options', $this->get_default_options());
         $services = $this->get_ai_services();
         
         foreach ($services as $key => $service) {
             $checked = in_array($key, $options['ai_services']);
             ?>
             <label style="display: block; margin-bottom: 5px;">
-                <input type="checkbox" name="sharetoai_options[ai_services][]" value="<?php echo esc_attr($key); ?>" <?php checked($checked); ?>>
+                <input type="checkbox" name="briefr_options[ai_services][]" value="<?php echo esc_attr($key); ?>" <?php checked($checked); ?>>
                 <?php echo esc_html($service['name']); ?>
             </label>
             <?php
@@ -288,12 +288,12 @@ class ShareToAI {
     }
     
     public function display_style_field_callback() {
-        $options = get_option('sharetoai_options', $this->get_default_options());
+        $options = get_option('briefr_options', $this->get_default_options());
         ?>
-        <select name="sharetoai_options[display_style]">
-            <option value="icons" <?php selected($options['display_style'], 'icons'); ?>><?php esc_html_e('Icônes uniquement', 'sharetoai'); ?></option>
-            <option value="buttons" <?php selected($options['display_style'], 'buttons'); ?>><?php esc_html_e('Boutons avec texte', 'sharetoai'); ?></option>
-            <option value="list" <?php selected($options['display_style'], 'list'); ?>><?php esc_html_e('Liste', 'sharetoai'); ?></option>
+        <select name="briefr_options[display_style]">
+            <option value="icons" <?php selected($options['display_style'], 'icons'); ?>><?php esc_html_e('Icônes uniquement', 'briefr-share-summarize'); ?></option>
+            <option value="buttons" <?php selected($options['display_style'], 'buttons'); ?>><?php esc_html_e('Boutons avec texte', 'briefr-share-summarize'); ?></option>
+            <option value="list" <?php selected($options['display_style'], 'list'); ?>><?php esc_html_e('Liste', 'briefr-share-summarize'); ?></option>
         </select>
         <?php
     }
@@ -308,14 +308,14 @@ class ShareToAI {
             <form action="options.php" method="post">
                 <?php
                 settings_fields('sharetoai_settings');
-                do_settings_sections('sharetoai');
-                submit_button(__('Enregistrer les paramètres', 'sharetoai'));
+                do_settings_sections('briefr-share-summarize');
+                submit_button(__('Enregistrer les paramètres', 'briefr-share-summarize'));
                 ?>
             </form>
             
-            <div class="sharetoai-shortcode-info">
-                <h2><?php esc_html_e('Utilisation du shortcode', 'sharetoai'); ?></h2>
-                <p><?php esc_html_e('Vous pouvez utiliser le shortcode suivant pour afficher les liens IA manuellement :', 'sharetoai'); ?></p>
+            <div class="briefr-shortcode-info">
+                <h2><?php esc_html_e('Utilisation du shortcode', 'briefr-share-summarize'); ?></h2>
+                <p><?php esc_html_e('Vous pouvez utiliser le shortcode suivant pour afficher les liens IA manuellement :', 'briefr-share-summarize'); ?></p>
                 <code>[sharetoai]</code>
             </div>
         </div>
@@ -323,7 +323,7 @@ class ShareToAI {
     }
     
     public function add_ai_links_to_content($content) {
-        $options = get_option('sharetoai_options', $this->get_default_options());
+        $options = get_option('briefr_options', $this->get_default_options());
         
         if (!$options['enabled']) {
             return $content;
@@ -356,7 +356,7 @@ class ShareToAI {
     }
     
     private function generate_ai_links() {
-        $options = get_option('sharetoai_options', $this->get_default_options());
+        $options = get_option('briefr_options', $this->get_default_options());
         $current_url = get_permalink();
         
         if (!$current_url) {
@@ -377,31 +377,31 @@ class ShareToAI {
         
         ob_start();
         ?>
-        <div class="sharetoai-container sharetoai-style-<?php echo esc_attr($options['display_style']); ?>">
-            <div class="sharetoai-text">
+        <div class="briefr-container briefr-style-<?php echo esc_attr($options['display_style']); ?>">
+            <div class="briefr-text">
                 <?php echo esc_html($options['custom_text']); ?>
             </div>
-            <div class="sharetoai-links">
+            <div class="briefr-links">
                 <?php foreach ($active_services as $key => $service): ?>
                     <?php
                     $url = str_replace('{PROMPT}', $encoded_prompt, $service['url']);
                     ?>
                     <a href="<?php echo esc_url($url); ?>" 
-                       class="sharetoai-link sharetoai-link-<?php echo esc_attr($key); ?>" 
+                       class="briefr-link briefr-link-<?php echo esc_attr($key); ?>" 
                        target="_blank" 
                        rel="nofollow noopener noreferrer"
-                       title="<?php echo esc_attr(sprintf(__('Résumer avec %s', 'sharetoai'), $service['name'])); ?>">
+                       title="<?php echo esc_attr(sprintf(__('Résumer avec %s', 'briefr-share-summarize'), $service['name'])); ?>">
                         <?php if ($options['display_style'] === 'icons'): ?>
                             <img src="<?php echo esc_url(SHARETOAI_PLUGIN_URL . 'assets/images/' . $service['icon']); ?>" 
                                  alt="<?php echo esc_attr($service['name']); ?>"
-                                 class="sharetoai-icon">
+                                 class="briefr-icon">
                         <?php elseif ($options['display_style'] === 'buttons'): ?>
                             <img src="<?php echo esc_url(SHARETOAI_PLUGIN_URL . 'assets/images/' . $service['icon']); ?>" 
                                  alt="<?php echo esc_attr($service['name']); ?>"
-                                 class="sharetoai-icon">
-                            <span class="sharetoai-name"><?php echo esc_html($service['name']); ?></span>
+                                 class="briefr-icon">
+                            <span class="briefr-name"><?php echo esc_html($service['name']); ?></span>
                         <?php else: ?>
-                            <span class="sharetoai-name"><?php echo esc_html($service['name']); ?></span>
+                            <span class="briefr-name"><?php echo esc_html($service['name']); ?></span>
                         <?php endif; ?>
                     </a>
                 <?php endforeach; ?>
@@ -454,11 +454,11 @@ class ShareToAI {
     }
     
     public function activate() {
-        add_option('sharetoai_options', $this->get_default_options());
+        add_option('briefr_options', $this->get_default_options());
     }
     
     public function deactivate() {
     }
 }
 
-ShareToAI::get_instance();
+Briefr_Share_Summarize::get_instance();
