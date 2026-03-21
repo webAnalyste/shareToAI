@@ -32,7 +32,8 @@ cp readme.txt "$RELEASE_DIR/"
 cp README.md "$RELEASE_DIR/"
 cp CHANGELOG.md "$RELEASE_DIR/"
 cp -r assets "$RELEASE_DIR/"
-cp -r includes "$RELEASE_DIR/"
+mkdir -p "$RELEASE_DIR/languages"
+# Note: includes/class-updater.php est exclu car WordPress.org interdit les custom updaters
 
 # Créer le ZIP
 echo -e "${YELLOW}🗜️  Création du fichier ZIP...${NC}"
