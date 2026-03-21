@@ -1,5 +1,5 @@
-=== ShareToAI ===
-Contributors: franckscan
+=== Briefr: Share & Summarize ===
+Contributors: fscan
 Tags: ai, artificial intelligence, chatgpt, claude, perplexity, summary, content
 Requires at least: 5.0
 Tested up to: 6.4
@@ -12,7 +12,7 @@ Ajoutez automatiquement des liens vers différentes IA pour résumer le contenu 
 
 == Description ==
 
-ShareToAI permet d'afficher automatiquement une invitation personnalisable "Résumer ce contenu avec :" suivie d'icônes cliquables vers différents services d'IA (Perplexity, ChatGPT, Claude, Grok, Mistral).
+Briefr: Share & Summarize permet d'afficher automatiquement une invitation personnalisable "Résumer ce contenu avec :" suivie d'icônes cliquables vers différents services d'IA (Perplexity, ChatGPT, Claude, Grok, Mistral).
 
 = Fonctionnalités principales =
 
@@ -37,7 +37,7 @@ ShareToAI permet d'afficher automatiquement une invitation personnalisable "Rés
 = Utilisation =
 
 1. Activez le plugin
-2. Allez dans Réglages > ShareToAI
+2. Allez dans Réglages > Briefr
 3. Configurez vos préférences
 4. Les liens IA apparaîtront automatiquement sur vos articles
 
@@ -48,7 +48,7 @@ Vous pouvez aussi utiliser le shortcode `[sharetoai]` pour un placement manuel d
 = Installation automatique =
 
 1. Allez dans Extensions > Ajouter
-2. Recherchez "ShareToAI"
+2. Recherchez "Briefr"
 3. Cliquez sur Installer puis Activer
 
 = Installation manuelle =
@@ -68,11 +68,11 @@ Vous pouvez aussi utiliser le shortcode `[sharetoai]` pour un placement manuel d
 
 = Comment personnaliser le texte d'invitation ? =
 
-Allez dans Réglages > ShareToAI et modifiez le champ "Texte personnalisé".
+Allez dans Réglages > Briefr et modifiez le champ "Texte personnalisé".
 
 = Comment choisir quels services IA afficher ? =
 
-Dans Réglages > ShareToAI, cochez/décochez les services dans la section "Services IA activés".
+Dans Réglages > Briefr, cochez/décochez les services dans la section "Services IA activés".
 
 = Le shortcode fonctionne-t-il dans les widgets ? =
 
@@ -80,7 +80,7 @@ Oui, le shortcode `[sharetoai]` fonctionne dans les articles, pages, widgets tex
 
 = Le plugin est-il compatible avec les page builders ? =
 
-Oui, ShareToAI est compatible avec Elementor, Divi, Gutenberg et tous les page builders majeurs.
+Oui, Briefr est compatible avec Elementor, Divi, Gutenberg et tous les page builders majeurs.
 
 = Comment désactiver le plugin sur certains articles ? =
 
@@ -88,11 +88,11 @@ Réglez la position sur "Manuel" dans les paramètres, puis utilisez le shortcod
 
 = Le plugin ralentit-il mon site ? =
 
-Non, ShareToAI est très léger (<10KB total) et n'effectue aucune requête externe.
+Non, Briefr est très léger (<10KB total) et n'effectue aucune requête externe.
 
 == Screenshots ==
 
-1. Page de configuration du plugin dans Réglages > ShareToAI
+1. Page de configuration du plugin dans Réglages > Briefr
 2. Affichage des liens IA en style "Icônes" sur un article
 3. Affichage en style "Boutons avec texte"
 4. Affichage en style "Liste"
@@ -126,7 +126,7 @@ Non, ShareToAI est très léger (<10KB total) et n'effectue aucune requête exte
 == Upgrade Notice ==
 
 = 1.0.0 =
-Version initiale du plugin ShareToAI.
+Version initiale du plugin Briefr: Share & Summarize.
 
 == Support ==
 

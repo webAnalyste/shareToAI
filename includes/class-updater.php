@@ -149,7 +149,7 @@ class ShareToAI_Updater {
         $changelog = $this->get_changelog();
         
         $plugin_info = new stdClass();
-        $plugin_info->name = 'ShareToAI';
+        $plugin_info->name = 'Briefr: Share & Summarize';
         $plugin_info->slug = dirname($this->plugin_slug);
         $plugin_info->version = $remote_version;
         $plugin_info->author = '<a href="https://www.webanalyste.com">Franck Scandolera</a>';
