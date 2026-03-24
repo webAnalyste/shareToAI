@@ -1,6 +1,6 @@
 jQuery(document).ready(function ($) {
-    $('.sharetoai-link').on('click', function (e) {
-        var aiName = $(this).find('.sharetoai-name').text() || $(this).attr('title');
+    $('.posttoai-link').on('click', function (e) {
+        var aiName = $(this).find('.posttoai-name').text() || $(this).attr('title');
 
         if (typeof gtag !== 'undefined') {
             gtag('event', 'ai_summary_click', {

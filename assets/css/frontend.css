@@ -1,4 +1,4 @@
-.sharetoai-container {
+.posttoai-container {
     margin: 30px 0;
     padding: 20px;
     background: #f8f9fa;
@@ -6,21 +6,21 @@
     border-left: 4px solid #0073aa;
 }
 
-.sharetoai-text {
+.posttoai-text {
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 15px;
     color: #333;
 }
 
-.sharetoai-links {
+.posttoai-links {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
     align-items: center;
 }
 
-.sharetoai-link {
+.posttoai-link {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -28,35 +28,35 @@
     transition: all 0.3s ease;
 }
 
-.sharetoai-link:hover {
+.posttoai-link:hover {
     transform: translateY(-2px);
     text-decoration: none !important;
 }
 
-.sharetoai-link:focus,
-.sharetoai-link:active,
-.sharetoai-link:visited {
+.posttoai-link:focus,
+.posttoai-link:active,
+.posttoai-link:visited {
     text-decoration: none !important;
 }
 
-.sharetoai-icon {
+.posttoai-icon {
     width: 32px;
     height: 32px;
     object-fit: contain;
 }
 
-.sharetoai-style-icons .sharetoai-link {
+.posttoai-style-icons .posttoai-link {
     padding: 8px;
     background: white;
     border-radius: 50%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.sharetoai-style-icons .sharetoai-link:hover {
+.posttoai-style-icons .posttoai-link:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.sharetoai-style-buttons .sharetoai-link {
+.posttoai-style-buttons .posttoai-link {
     padding: 10px 20px;
     background: white;
     border-radius: 6px;
@@ -66,28 +66,28 @@
     border: 1px solid #ddd;
 }
 
-.sharetoai-style-buttons .sharetoai-link:hover {
+.posttoai-style-buttons .posttoai-link:hover {
     background: #0073aa;
     color: white !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     border-color: #0073aa;
 }
 
-.sharetoai-style-buttons .sharetoai-icon {
+.posttoai-style-buttons .posttoai-icon {
     width: 24px;
     height: 24px;
 }
 
-.sharetoai-style-buttons .sharetoai-name {
+.posttoai-style-buttons .posttoai-name {
     text-decoration: none !important;
 }
 
-.sharetoai-style-list .sharetoai-links {
+.posttoai-style-list .posttoai-links {
     flex-direction: column;
     align-items: flex-start;
 }
 
-.sharetoai-style-list .sharetoai-link {
+.posttoai-style-list .posttoai-link {
     padding: 12px 20px;
     background: white;
     border-radius: 6px;
@@ -99,37 +99,37 @@
     border: 1px solid #ddd;
 }
 
-.sharetoai-style-list .sharetoai-link:hover {
+.posttoai-style-list .posttoai-link:hover {
     background: #0073aa;
     color: white !important;
     border-color: #0073aa;
 }
 
-.sharetoai-style-list .sharetoai-icon {
+.posttoai-style-list .posttoai-icon {
     width: 24px;
     height: 24px;
 }
 
-.sharetoai-style-list .sharetoai-name {
+.posttoai-style-list .posttoai-name {
     text-decoration: none !important;
 }
 
 @media (max-width: 768px) {
-    .sharetoai-container {
+    .posttoai-container {
         padding: 15px;
     }
 
-    .sharetoai-links {
+    .posttoai-links {
         gap: 10px;
     }
 
-    .sharetoai-icon {
+    .posttoai-icon {
         width: 28px;
         height: 28px;
     }
 
-    .sharetoai-style-buttons .sharetoai-link,
-    .sharetoai-style-list .sharetoai-link {
+    .posttoai-style-buttons .posttoai-link,
+    .posttoai-style-list .posttoai-link {
         padding: 8px 15px;
         font-size: 14px;
     }

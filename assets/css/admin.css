@@ -1,4 +1,4 @@
-.sharetoai-shortcode-info {
+.posttoai-shortcode-info {
     margin-top: 30px;
     padding: 20px;
     background: #fff;
@@ -7,12 +7,12 @@
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
 }
 
-.sharetoai-shortcode-info h2 {
+.posttoai-shortcode-info h2 {
     margin-top: 0;
     font-size: 18px;
 }
 
-.sharetoai-shortcode-info code {
+.posttoai-shortcode-info code {
     display: inline-block;
     padding: 8px 12px;
     background: #f0f0f1;
