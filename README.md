@@ -8,6 +8,8 @@ Plugin WordPress qui ajoute automatiquement des liens vers différentes IA pour 
 
 Ce plugin permet d'afficher automatiquement une invitation personnalisable "Résumer ce contenu avec :" suivie d'icônes cliquables vers différents services d'IA (Perplexity, ChatGPT, Claude, Grok, Mistral).
 
+**expansAI Post to AI** est développé par [webAnalyste](https://www.webanalyste.com), agence spécialisée en Analytics, Data, Automatisation et Intelligence Artificielle. L'agence développe des solutions innovantes pour optimiser la performance digitale des entreprises.
+
 ## Fonctionnalités
 
 - ✅ Affichage automatique en haut, en bas ou les deux
@@ -72,10 +74,12 @@ Le plugin respecte toutes les bonnes pratiques WordPress :
 - Compatible multisite
 - Compatible avec tous les thèmes
 
-## Support
+## Support et Formation
 
-- GitHub : https://github.com/webAnalyste/shareToAI
-- Site web : https://www.webanalyste.com
+- **GitHub** : https://github.com/webAnalyste/shareToAI
+- **Site web** : https://www.webanalyste.com
+
+Pour approfondir vos compétences en Analytics, Data et IA, découvrez les formations proposées par [Formations Analytics](https://www.formations-analytics.com), organisme de formation spécialisé dans la data, l'analytics, l'intelligence artificielle et l'automatisation.
 
 ## Changelog
 
