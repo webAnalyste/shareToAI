@@ -1,25 +1,25 @@
 <?php
 /**
- * Plugin Name: PostToAI
+ * Plugin Name: expansAI Post to AI
  * Plugin URI: https://github.com/webAnalyste/shareToAI
  * Description: Ajoute automatiquement des liens vers différentes IA pour résumer le contenu de vos posts et CPT
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: Franck Scandolera
  * Author URI: https://www.webanalyste.com
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: posttoai
+ * Text Domain: expansai-post-to-ai
  */
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-define('POSTTOAI_VERSION', '1.0.4');
-define('POSTTOAI_PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('POSTTOAI_PLUGIN_URL', plugin_dir_url(__FILE__));
+define('EXPANSAI_PTAI_VERSION', '1.0.5');
+define('EXPANSAI_PTAI_DIR', plugin_dir_path(__FILE__));
+define('EXPANSAI_PTAI_URL', plugin_dir_url(__FILE__));
 
-class PostToAI {
+class ExpansAI_Post_To_AI {
 
     private static $instance = null;
 
@@ -39,50 +39,50 @@ class PostToAI {
 
         add_filter('the_content', array($this, 'add_ai_links_to_content'), 999);
 
-        add_shortcode('posttoai', array($this, 'shortcode_handler'));
+        add_shortcode('expansai-post-to-ai', array($this, 'shortcode_handler'));
 
         register_activation_hook(__FILE__, array($this, 'activate'));
         register_deactivation_hook(__FILE__, array($this, 'deactivate'));
     }
 
     public function load_textdomain() {
-        load_plugin_textdomain('posttoai', false, dirname(plugin_basename(__FILE__)) . '/languages');
+        load_plugin_textdomain('expansai-post-to-ai', false, dirname(plugin_basename(__FILE__)) . '/languages');
     }
 
     public function enqueue_frontend_assets() {
         wp_enqueue_style(
-            'posttoai-frontend',
-            POSTTOAI_PLUGIN_URL . 'assets/css/frontend.css',
+            'expansai-ptai-frontend',
+            EXPANSAI_PTAI_URL . 'assets/css/frontend.css',
             array(),
-            POSTTOAI_VERSION
+            EXPANSAI_PTAI_VERSION
         );
 
         wp_enqueue_script(
-            'posttoai-frontend',
-            POSTTOAI_PLUGIN_URL . 'assets/js/frontend.js',
+            'expansai-ptai-frontend',
+            EXPANSAI_PTAI_URL . 'assets/js/frontend.js',
             array('jquery'),
-            POSTTOAI_VERSION,
+            EXPANSAI_PTAI_VERSION,
             true
         );
     }
 
     public function enqueue_admin_assets($hook) {
-        if ('settings_page_posttoai' !== $hook) {
+        if ('settings_page_expansai-post-to-ai' !== $hook) {
             return;
         }
 
         wp_enqueue_style(
-            'posttoai-admin',
-            POSTTOAI_PLUGIN_URL . 'assets/css/admin.css',
+            'expansai-ptai-admin',
+            EXPANSAI_PTAI_URL . 'assets/css/admin.css',
             array(),
-            POSTTOAI_VERSION
+            EXPANSAI_PTAI_VERSION
         );
 
         wp_enqueue_script(
-            'posttoai-admin',
-            POSTTOAI_PLUGIN_URL . 'assets/js/admin.js',
+            'expansai-ptai-admin',
+            EXPANSAI_PTAI_URL . 'assets/js/admin.js',
             array('jquery'),
-            POSTTOAI_VERSION,
+            EXPANSAI_PTAI_VERSION,
             true
         );
 
@@ -92,78 +92,78 @@ class PostToAI {
 
     public function add_admin_menu() {
         add_options_page(
-            __('PostToAI', 'posttoai'),
-            __('PostToAI', 'posttoai'),
+            __('expansAI Post to AI', 'expansai-post-to-ai'),
+            __('expansAI Post to AI', 'expansai-post-to-ai'),
             'manage_options',
-            'posttoai',
+            'expansai-post-to-ai',
             array($this, 'render_admin_page')
         );
     }
 
     public function register_settings() {
-        register_setting('posttoai_settings', 'posttoai_options', array($this, 'sanitize_options'));
+        register_setting('expansai_ptai_settings', 'expansai_ptai_options', array($this, 'sanitize_options'));
 
         add_settings_section(
-            'posttoai_general_section',
-            __('Paramètres généraux', 'posttoai'),
+            'expansai_ptai_general_section',
+            __('Paramètres généraux', 'expansai-post-to-ai'),
             array($this, 'general_section_callback'),
-            'posttoai'
+            'expansai-post-to-ai'
         );
 
         add_settings_field(
-            'posttoai_enabled',
-            __('Activer le plugin', 'posttoai'),
+            'expansai_ptai_enabled',
+            __('Activer le plugin', 'expansai-post-to-ai'),
             array($this, 'enabled_field_callback'),
-            'posttoai',
-            'posttoai_general_section'
+            'expansai-post-to-ai',
+            'expansai_ptai_general_section'
         );
 
         add_settings_field(
-            'posttoai_position',
-            __('Position', 'posttoai'),
+            'expansai_ptai_position',
+            __('Position', 'expansai-post-to-ai'),
             array($this, 'position_field_callback'),
-            'posttoai',
-            'posttoai_general_section'
+            'expansai-post-to-ai',
+            'expansai_ptai_general_section'
         );
 
         add_settings_field(
-            'posttoai_post_types',
-            __('Types de contenu', 'posttoai'),
+            'expansai_ptai_post_types',
+            __('Types de contenu', 'expansai-post-to-ai'),
             array($this, 'post_types_field_callback'),
-            'posttoai',
-            'posttoai_general_section'
+            'expansai-post-to-ai',
+            'expansai_ptai_general_section'
         );
 
         add_settings_field(
-            'posttoai_custom_text',
-            __('Texte personnalisé', 'posttoai'),
+            'expansai_ptai_custom_text',
+            __('Texte personnalisé', 'expansai-post-to-ai'),
             array($this, 'custom_text_field_callback'),
-            'posttoai',
-            'posttoai_general_section'
+            'expansai-post-to-ai',
+            'expansai_ptai_general_section'
         );
 
         add_settings_field(
-            'posttoai_custom_prompt',
-            __('Prompt personnalisé', 'posttoai'),
+            'expansai_ptai_custom_prompt',
+            __('Prompt personnalisé', 'expansai-post-to-ai'),
             array($this, 'custom_prompt_field_callback'),
-            'posttoai',
-            'posttoai_general_section'
+            'expansai-post-to-ai',
+            'expansai_ptai_general_section'
         );
 
         add_settings_field(
-            'posttoai_ai_services',
-            __('Services IA activés', 'posttoai'),
+            'expansai_ptai_ai_services',
+            __('Services IA activés', 'expansai-post-to-ai'),
             array($this, 'ai_services_field_callback'),
-            'posttoai',
-            'posttoai_general_section'
+            'expansai-post-to-ai',
+            'expansai_ptai_general_section'
         );
 
         add_settings_field(
-            'posttoai_display_style',
-            __('Style d\'affichage', 'posttoai'),
+            'expansai_ptai_display_style',
+            __('Style d\'affichage', 'expansai-post-to-ai'),
             array($this, 'display_style_field_callback'),
-            'posttoai',
-            'posttoai_general_section'
+            'expansai-post-to-ai',
+            'expansai_ptai_general_section'
         );
     }
 
@@ -216,40 +216,40 @@ class PostToAI {
     }
 
     public function general_section_callback() {
-        echo '<p>' . esc_html__('Configurez l\'affichage des liens de résumé IA sur votre site.', 'posttoai') . '</p>';
+        echo '<p>' . esc_html__('Configurez l\'affichage des liens de résumé IA sur votre site.', 'expansai-post-to-ai') . '</p>';
     }
 
     public function enabled_field_callback() {
-        $options = get_option('posttoai_options', $this->get_default_options());
+        $options = get_option('expansai_ptai_options', $this->get_default_options());
         ?>
         <label>
-            <input type="checkbox" name="posttoai_options[enabled]" value="1" <?php checked($options['enabled'], 1); ?>>
-            <?php esc_html_e('Activer l\'affichage automatique des liens IA', 'posttoai'); ?>
+            <input type="checkbox" name="expansai_ptai_options[enabled]" value="1" <?php checked($options['enabled'], 1); ?>>
+            <?php esc_html_e('Activer l\'affichage automatique des liens IA', 'expansai-post-to-ai'); ?>
         </label>
         <?php
     }
 
     public function position_field_callback() {
-        $options = get_option('posttoai_options', $this->get_default_options());
+        $options = get_option('expansai_ptai_options', $this->get_default_options());
         ?>
-        <select name="posttoai_options[position]">
-            <option value="top" <?php selected($options['position'], 'top'); ?>><?php esc_html_e('En haut du contenu', 'posttoai'); ?></option>
-            <option value="bottom" <?php selected($options['position'], 'bottom'); ?>><?php esc_html_e('En bas du contenu', 'posttoai'); ?></option>
-            <option value="both" <?php selected($options['position'], 'both'); ?>><?php esc_html_e('En haut et en bas', 'posttoai'); ?></option>
-            <option value="manual" <?php selected($options['position'], 'manual'); ?>><?php esc_html_e('Manuel (shortcode uniquement)', 'posttoai'); ?></option>
+        <select name="expansai_ptai_options[position]">
+            <option value="top" <?php selected($options['position'], 'top'); ?>><?php esc_html_e('En haut du contenu', 'expansai-post-to-ai'); ?></option>
+            <option value="bottom" <?php selected($options['position'], 'bottom'); ?>><?php esc_html_e('En bas du contenu', 'expansai-post-to-ai'); ?></option>
+            <option value="both" <?php selected($options['position'], 'both'); ?>><?php esc_html_e('En haut et en bas', 'expansai-post-to-ai'); ?></option>
+            <option value="manual" <?php selected($options['position'], 'manual'); ?>><?php esc_html_e('Manuel (shortcode uniquement)', 'expansai-post-to-ai'); ?></option>
         </select>
         <?php
     }
 
     public function post_types_field_callback() {
-        $options = get_option('posttoai_options', $this->get_default_options());
+        $options = get_option('expansai_ptai_options', $this->get_default_options());
         $post_types = get_post_types(array('public' => true), 'objects');
 
         foreach ($post_types as $post_type) {
             $checked = in_array($post_type->name, $options['post_types']);
             ?>
             <label style="display: block; margin-bottom: 5px;">
-                <input type="checkbox" name="posttoai_options[post_types][]" value="<?php echo esc_attr($post_type->name); ?>" <?php checked($checked); ?>>
+                <input type="checkbox" name="expansai_ptai_options[post_types][]" value="<?php echo esc_attr($post_type->name); ?>" <?php checked($checked); ?>>
                 <?php echo esc_html($post_type->label); ?>
             </label>
             <?php
@@ -257,30 +257,30 @@ class PostToAI {
     }
 
     public function custom_text_field_callback() {
-        $options = get_option('posttoai_options', $this->get_default_options());
+        $options = get_option('expansai_ptai_options', $this->get_default_options());
         ?>
-        <input type="text" name="posttoai_options[custom_text]" value="<?php echo esc_attr($options['custom_text']); ?>" class="regular-text">
-        <p class="description"><?php esc_html_e('Texte affiché avant les icônes IA', 'posttoai'); ?></p>
+        <input type="text" name="expansai_ptai_options[custom_text]" value="<?php echo esc_attr($options['custom_text']); ?>" class="regular-text">
+        <p class="description"><?php esc_html_e('Texte affiché avant les icônes IA', 'expansai-post-to-ai'); ?></p>
         <?php
     }
 
     public function custom_prompt_field_callback() {
-        $options = get_option('posttoai_options', $this->get_default_options());
+        $options = get_option('expansai_ptai_options', $this->get_default_options());
         ?>
-        <textarea name="posttoai_options[custom_prompt]" rows="4" class="large-text"><?php echo esc_textarea($options['custom_prompt']); ?></textarea>
-        <p class="description"><?php esc_html_e('Utilisez {URL} comme placeholder pour l\'URL de la page', 'posttoai'); ?></p>
+        <textarea name="expansai_ptai_options[custom_prompt]" rows="4" class="large-text"><?php echo esc_textarea($options['custom_prompt']); ?></textarea>
+        <p class="description"><?php esc_html_e('Utilisez {URL} comme placeholder pour l\'URL de la page', 'expansai-post-to-ai'); ?></p>
         <?php
     }
 
     public function ai_services_field_callback() {
-        $options = get_option('posttoai_options', $this->get_default_options());
+        $options = get_option('expansai_ptai_options', $this->get_default_options());
         $services = $this->get_ai_services();
 
         foreach ($services as $key => $service) {
             $checked = in_array($key, $options['ai_services']);
             ?>
             <label style="display: block; margin-bottom: 5px;">
-                <input type="checkbox" name="posttoai_options[ai_services][]" value="<?php echo esc_attr($key); ?>" <?php checked($checked); ?>>
+                <input type="checkbox" name="expansai_ptai_options[ai_services][]" value="<?php echo esc_attr($key); ?>" <?php checked($checked); ?>>
                 <?php echo esc_html($service['name']); ?>
             </label>
             <?php
@@ -288,12 +288,12 @@ class PostToAI {
     }
 
     public function display_style_field_callback() {
-        $options = get_option('posttoai_options', $this->get_default_options());
+        $options = get_option('expansai_ptai_options', $this->get_default_options());
         ?>
-        <select name="posttoai_options[display_style]">
-            <option value="icons" <?php selected($options['display_style'], 'icons'); ?>><?php esc_html_e('Icônes uniquement', 'posttoai'); ?></option>
-            <option value="buttons" <?php selected($options['display_style'], 'buttons'); ?>><?php esc_html_e('Boutons avec texte', 'posttoai'); ?></option>
-            <option value="list" <?php selected($options['display_style'], 'list'); ?>><?php esc_html_e('Liste', 'posttoai'); ?></option>
+        <select name="expansai_ptai_options[display_style]">
+            <option value="icons" <?php selected($options['display_style'], 'icons'); ?>><?php esc_html_e('Icônes uniquement', 'expansai-post-to-ai'); ?></option>
+            <option value="buttons" <?php selected($options['display_style'], 'buttons'); ?>><?php esc_html_e('Boutons avec texte', 'expansai-post-to-ai'); ?></option>
+            <option value="list" <?php selected($options['display_style'], 'list'); ?>><?php esc_html_e('Liste', 'expansai-post-to-ai'); ?></option>
         </select>
         <?php
     }
@@ -307,23 +307,23 @@ class PostToAI {
             <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
             <form action="options.php" method="post">
                 <?php
-                settings_fields('posttoai_settings');
-                do_settings_sections('posttoai');
-                submit_button(__('Enregistrer les paramètres', 'posttoai'));
+                settings_fields('expansai_ptai_settings');
+                do_settings_sections('expansai-post-to-ai');
+                submit_button(__('Enregistrer les paramètres', 'expansai-post-to-ai'));
                 ?>
             </form>
 
-            <div class="posttoai-shortcode-info">
-                <h2><?php esc_html_e('Utilisation du shortcode', 'posttoai'); ?></h2>
-                <p><?php esc_html_e('Vous pouvez utiliser le shortcode suivant pour afficher les liens IA manuellement :', 'posttoai'); ?></p>
-                <code>[posttoai]</code>
+            <div class="expansai-ptai-shortcode-info">
+                <h2><?php esc_html_e('Utilisation du shortcode', 'expansai-post-to-ai'); ?></h2>
+                <p><?php esc_html_e('Vous pouvez utiliser le shortcode suivant pour afficher les liens IA manuellement :', 'expansai-post-to-ai'); ?></p>
+                <code>[expansai-post-to-ai]</code>
             </div>
         </div>
         <?php
     }
 
     public function add_ai_links_to_content($content) {
-        $options = get_option('posttoai_options', $this->get_default_options());
+        $options = get_option('expansai_ptai_options', $this->get_default_options());
 
         if (!$options['enabled']) {
             return $content;
@@ -356,7 +356,7 @@ class PostToAI {
     }
 
     private function generate_ai_links() {
-        $options = get_option('posttoai_options', $this->get_default_options());
+        $options = get_option('expansai_ptai_options', $this->get_default_options());
         $current_url = get_permalink();
 
         if (!$current_url) {
@@ -377,31 +377,31 @@ class PostToAI {
 
         ob_start();
         ?>
-        <div class="posttoai-container posttoai-style-<?php echo esc_attr($options['display_style']); ?>">
-            <div class="posttoai-text">
+        <div class="expansai-ptai-container expansai-ptai-style-<?php echo esc_attr($options['display_style']); ?>">
+            <div class="expansai-ptai-text">
                 <?php echo esc_html($options['custom_text']); ?>
             </div>
-            <div class="posttoai-links">
+            <div class="expansai-ptai-links">
                 <?php foreach ($active_services as $key => $service): ?>
                     <?php
                     $url = str_replace('{PROMPT}', $encoded_prompt, $service['url']);
                     ?>
                     <a href="<?php echo esc_url($url); ?>"
-                       class="posttoai-link posttoai-link-<?php echo esc_attr($key); ?>"
+                       class="expansai-ptai-link expansai-ptai-link-<?php echo esc_attr($key); ?>"
                        target="_blank"
                        rel="nofollow noopener noreferrer"
-                       title="<?php echo esc_attr(sprintf(__('Résumer avec %s', 'posttoai'), $service['name'])); ?>">
+                       title="<?php echo esc_attr(sprintf(__('Résumer avec %s', 'expansai-post-to-ai'), $service['name'])); ?>">
                         <?php if ($options['display_style'] === 'icons'): ?>
-                            <img src="<?php echo esc_url(POSTTOAI_PLUGIN_URL . 'assets/images/' . $service['icon']); ?>"
+                            <img src="<?php echo esc_url(EXPANSAI_PTAI_URL . 'assets/images/' . $service['icon']); ?>"
                                  alt="<?php echo esc_attr($service['name']); ?>"
-                                 class="posttoai-icon">
+                                 class="expansai-ptai-icon">
                         <?php elseif ($options['display_style'] === 'buttons'): ?>
-                            <img src="<?php echo esc_url(POSTTOAI_PLUGIN_URL . 'assets/images/' . $service['icon']); ?>"
+                            <img src="<?php echo esc_url(EXPANSAI_PTAI_URL . 'assets/images/' . $service['icon']); ?>"
                                  alt="<?php echo esc_attr($service['name']); ?>"
-                                 class="posttoai-icon">
-                            <span class="posttoai-name"><?php echo esc_html($service['name']); ?></span>
+                                 class="expansai-ptai-icon">
+                            <span class="expansai-ptai-name"><?php echo esc_html($service['name']); ?></span>
                         <?php else: ?>
-                            <span class="posttoai-name"><?php echo esc_html($service['name']); ?></span>
+                            <span class="expansai-ptai-name"><?php echo esc_html($service['name']); ?></span>
                         <?php endif; ?>
                     </a>
                 <?php endforeach; ?>
@@ -454,11 +454,11 @@ class PostToAI {
     }
 
     public function activate() {
-        add_option('posttoai_options', $this->get_default_options());
+        add_option('expansai_ptai_options', $this->get_default_options());
     }
 
     public function deactivate() {
     }
 }
 
-PostToAI::get_instance();
+ExpansAI_Post_To_AI::get_instance();
