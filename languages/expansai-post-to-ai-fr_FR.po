@@ -1,0 +1,130 @@
+# Translation of Fscan - Post to AI in French (France)
+# This file is distributed under the same license as the Fscan - Post to AI package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Fscan - Post to AI 1.0.5\n"
+"Report-Msgid-Bugs-To: https://github.com/webAnalyste/shareToAI/issues\n"
+"POT-Creation-Date: 2026-04-26 11:00+0000\n"
+"PO-Revision-Date: 2026-04-26 11:00+0000\n"
+"Last-Translator: Franck Scandolera <contact@webanalyste.com>\n"
+"Language-Team: French\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Manual\n"
+
+#: expansai-post-to-ai.php:95
+#: expansai-post-to-ai.php:96
+msgid "Fscan - Post to AI"
+msgstr "Fscan - Post to AI"
+
+#: expansai-post-to-ai.php:108
+msgid "General Settings"
+msgstr "Paramètres généraux"
+
+#: expansai-post-to-ai.php:115
+msgid "Enable Plugin"
+msgstr "Activer le plugin"
+
+#: expansai-post-to-ai.php:123
+msgid "Position"
+msgstr "Position"
+
+#: expansai-post-to-ai.php:131
+msgid "Content Types"
+msgstr "Types de contenu"
+
+#: expansai-post-to-ai.php:139
+msgid "Custom Text"
+msgstr "Texte personnalisé"
+
+#: expansai-post-to-ai.php:147
+msgid "Custom Prompt"
+msgstr "Prompt personnalisé"
+
+#: expansai-post-to-ai.php:155
+msgid "Enabled AI Services"
+msgstr "Services IA activés"
+
+#: expansai-post-to-ai.php:163
+msgid "Display Style"
+msgstr "Style d'affichage"
+
+#: expansai-post-to-ai.php:219
+msgid "Configure the display of AI summary links on your site."
+msgstr "Configurez l'affichage des liens de résumé IA sur votre site."
+
+#: expansai-post-to-ai.php:227
+msgid "Enable automatic display of AI links"
+msgstr "Activer l'affichage automatique des liens IA"
+
+#: expansai-post-to-ai.php:236
+msgid "Top of content"
+msgstr "En haut du contenu"
+
+#: expansai-post-to-ai.php:237
+msgid "Bottom of content"
+msgstr "En bas du contenu"
+
+#: expansai-post-to-ai.php:238
+msgid "Top and bottom"
+msgstr "En haut et en bas"
+
+#: expansai-post-to-ai.php:239
+msgid "Manual (shortcode only)"
+msgstr "Manuel (shortcode uniquement)"
+
+#: expansai-post-to-ai.php:263
+msgid "Text displayed before AI icons"
+msgstr "Texte affiché avant les icônes IA"
+
+#: expansai-post-to-ai.php:271
+msgid "Use {URL} as placeholder for the page URL"
+msgstr "Utilisez {URL} comme placeholder pour l'URL de la page"
+
+#: expansai-post-to-ai.php:294
+msgid "Icons only"
+msgstr "Icônes uniquement"
+
+#: expansai-post-to-ai.php:295
+msgid "Buttons with text"
+msgstr "Boutons avec texte"
+
+#: expansai-post-to-ai.php:296
+msgid "List"
+msgstr "Liste"
+
+#: expansai-post-to-ai.php:312
+msgid "Save Settings"
+msgstr "Enregistrer les paramètres"
+
+#: expansai-post-to-ai.php:317
+msgid "Shortcode Usage"
+msgstr "Utilisation du shortcode"
+
+#: expansai-post-to-ai.php:318
+msgid "You can use the following shortcode to display AI links manually:"
+msgstr "Vous pouvez utiliser le shortcode suivant pour afficher les liens IA manuellement :"
+
+#: expansai-post-to-ai.php:393
+#, php-format
+msgid "Summarize with %s"
+msgstr "Résumer avec %s"
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/webAnalyste/shareToAI"
+msgstr "https://github.com/webAnalyste/shareToAI"
+
+#. Description of the plugin/theme
+msgid "Automatically add links to various AI services to summarize your posts and Custom Post Types content"
+msgstr "Ajoute automatiquement des liens vers différentes IA pour résumer le contenu de vos posts et Custom Post Types"
+
+#. Author of the plugin/theme
+msgid "Franck Scandolera"
+msgstr "Franck Scandolera"
+
+#. Author URI of the plugin/theme
+msgid "https://www.webanalyste.com"
+msgstr "https://www.webanalyste.com"
