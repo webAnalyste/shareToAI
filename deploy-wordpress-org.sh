@@ -99,18 +99,24 @@ mkdir -p assets
 # Recherche et copie des screenshots et bannières
 if [ -d "$PLUGIN_DIR/assets/images" ]; then
     # Screenshots
-    for file in "$PLUGIN_DIR/assets/images/screenshot-"*.{png,jpg,jpeg} 2>/dev/null; do
-        [ -f "$file" ] && cp "$file" assets/
+    for ext in png jpg jpeg; do
+        for file in "$PLUGIN_DIR/assets/images/screenshot-"*."$ext"; do
+            [ -f "$file" ] && cp "$file" assets/
+        done
     done
     
     # Bannières
-    for file in "$PLUGIN_DIR/assets/images/banner-"*.{png,jpg,jpeg} 2>/dev/null; do
-        [ -f "$file" ] && cp "$file" assets/
+    for ext in png jpg jpeg; do
+        for file in "$PLUGIN_DIR/assets/images/banner-"*."$ext"; do
+            [ -f "$file" ] && cp "$file" assets/
+        done
     done
     
     # Icône
-    for file in "$PLUGIN_DIR/assets/images/icon-"*.{png,jpg,jpeg,svg} 2>/dev/null; do
-        [ -f "$file" ] && cp "$file" assets/
+    for ext in png jpg jpeg svg; do
+        for file in "$PLUGIN_DIR/assets/images/icon-"*."$ext"; do
+            [ -f "$file" ] && cp "$file" assets/
+        done
     done
 fi
 
