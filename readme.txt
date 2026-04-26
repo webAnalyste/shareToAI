@@ -1,6 +1,6 @@
 === Fscan - Post to AI ===
 Contributors: fscan
-Tags: ai, artificial intelligence, chatgpt, claude, perplexity, summary, content
+Tags: ai, chatgpt, claude, perplexity, summary
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.4
