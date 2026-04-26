@@ -13,7 +13,7 @@ NC='\033[0m' # No Color
 
 # Configuration
 PLUGIN_SLUG="expansai-post-to-ai"
-PLUGIN_VERSION="1.0.6"
+PLUGIN_VERSION="1.0.7"
 SVN_URL="https://plugins.svn.wordpress.org/${PLUGIN_SLUG}"
 SVN_USERNAME="fscan"
 PLUGIN_DIR="$(pwd)"
