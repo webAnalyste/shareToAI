@@ -4,7 +4,7 @@ Tags: ai, chatgpt, claude, perplexity, summary
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -127,6 +127,13 @@ Example: "Summarize this article titled '{TITLE}' by {AUTHOR} from {DOMAIN}: {UR
 
 == Changelog ==
 
+= 1.0.6 - 2026-04-26 =
+* Feature: 7 placeholders available ({URL}, {DOMAIN}, {SITE_NAME}, {TITLE}, {AUTHOR}, {DATE}, {EXCERPT})
+* Fix: SVG icons now have proper dimensions (32x32px)
+* Fix: Default texts are now properly translated based on WordPress language
+* Fix: Automatic migration of existing settings to translated versions
+* Improvement: Full internationalization (English by default + French translation)
+
 = 1.0.5 - 2026-04-26 =
 * Plugin name: Fscan - Post to AI
 * WordPress.org slug: expansai-post-to-ai
@@ -161,6 +168,9 @@ Example: "Summarize this article titled '{TITLE}' by {AUTHOR} from {DOMAIN}: {UR
 * Secure according to WordPress standards
 
 == Upgrade Notice ==
+
+= 1.0.6 =
+Major update: 7 placeholders, fixed SVG sizes, automatic translation migration. Your settings will be automatically updated to match your WordPress language.
 
 = 1.0.5 =
 Plugin name: Fscan - Post to AI. Update your shortcodes: `[posttoai]` must be replaced with `[expansai-post-to-ai]`.
